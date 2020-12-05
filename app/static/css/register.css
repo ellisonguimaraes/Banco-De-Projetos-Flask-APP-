@@ -1,0 +1,26 @@
+.content{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.content > .form {
+    width:70%;
+}
+
+.button{
+    display:flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:space-around;
+    margin: 0 auto;
+    width:50%;
+}
+
+.button > button, .button > a{
+    margin:20px;
+}

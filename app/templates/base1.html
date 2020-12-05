@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{url_for('static', filename='dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/register.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header2">
+        <nav class="nav2">
+            <h1 id="titleheader">Projetos<span>.</span></h1>
+            <ul>
+                <li><a href="index.html" alt="" >Home</a></li>
+                <li><a href="projeto.html" alt="" >Projetos</a></li>
+                <li><a href="contato.html" alt="" id="active">Contato</a></li>
+                <li><a href="{{url_for('auth.login')}}" alt="" id="button">Acessar</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    {% block content %}
+    {% endblock %}
+
+    <script>
+        function onSubmit(token) {
+          document.getElementById("demo-form").submit();
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+</body>
+</html>

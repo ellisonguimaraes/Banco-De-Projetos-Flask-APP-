@@ -1,0 +1,97 @@
+
+
+#em_andamento {
+    border:1px solid #FFBD1B;
+    padding:2px 5px;
+    color:#FFBD1B;
+    margin:0 0 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.proj_page{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    max-width: 800px;
+    margin: 50px auto;
+    text-align:center;
+}
+
+.buttons{
+    align-self: flex-start;
+}
+
+.buttons > a{
+    margin:5px;
+}
+
+
+.perfil{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    margin:25px 0;
+    align-items: center;
+    text-align:left;
+}
+
+.perfil > h3{
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    width: 100%;
+}
+
+.perfil > p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    width: 100%;
+    text-align: justify;
+    padding:25px;
+}
+
+.perfil > div {
+    width: 100%;
+    max-width: 400px;
+}
+
+.carousel-item img {
+    width:400px;
+    height:300px;
+    border-radius: 5px;
+}
+
+
+.proj_page table{
+    margin:30px 0;
+}
+
+#title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.list_key{
+    list-style-type: none;
+}
+
+.pdf{
+    width:100%;
+}
+
+.pdf > h3{
+    width:100%;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    padding:15px;
+}
+
+.pdf > iframe{
+    width:100%;
+    padding:0 15px;
+    height: 450px;
+}

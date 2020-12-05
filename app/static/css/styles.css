@@ -1,0 +1,222 @@
+body, hr, p, a, h1, h2, h3, h4, h5, h6, ul, li{
+    padding:0;
+    margin:0;
+    border:0;
+    text-decoration: none;
+}
+
+
+
+#active {
+    color:#0C92B8;
+}
+
+#button{
+    padding:8px 15px;
+    border:2px solid #0C92B8;
+    border-radius:5px;
+    color:#0C92B8;
+    align-self: center;
+    justify-self: center;
+}
+
+#titleheader{
+    font-family: 'Fjalla One', 'Roboto', sans-serif;
+    color:white;
+    font-size: 28px;
+    width: 40%;
+    min-width: 100px;
+}
+
+#titleheader > span {
+    color:#0C92B8;
+}
+
+
+#title_h2 {
+    font-family: 'Fjalla One', 'Roboto', sans-serif;
+    color:#280F31;
+    font-size: 28px;
+}
+
+#line{
+    width:100px;
+    border:1px solid #0C92B8;
+    background: #0C92B8;
+    margin:20px 0;
+}
+
+
+
+/*******************************
+HEADER 1
+********************************/
+
+.header{
+    display:flex;
+    flex-direction: row;
+    background-image:
+    radial-gradient(
+      circle at center center,
+      #280F31 50%,
+      #4D2B59 500%
+    );
+    height: 400px;
+    justify-content: center;
+}
+
+.header > section {
+    display:flex;
+    flex-direction: column;
+    max-width: 800px;
+    width: 100%;
+    height:100%;
+    background: url("../img/struct.png") no-repeat top left;
+    background-size:auto 85%;
+}
+
+.nav{
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    width:100%;
+    height:25%;
+}
+
+
+
+.nav > ul {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items:center;
+    width: 60%;
+    height: 100%;
+}
+
+.nav > ul > li{
+    display:inline;
+}
+
+.nav > ul > li > a{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    color:white;
+    padding:8px 15px;
+}
+
+.nav > ul > li > a:hover{
+    color:#0C92B8;
+}
+
+.header > section > section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width:60%;
+    height:60%;
+    align-self:flex-end;
+}
+
+.header > section > section > h3 {
+    font-family: 'Fjalla One', 'Roboto', sans-serif;
+    color:white;
+    font-size: 24px;
+}
+
+.header > section > section > p {
+    font-family: 'Roboto', sans-serif;
+    color:white;
+    font-size: 16px;
+    padding:15px 0;
+}
+
+.header > section > section > h3 > span {
+    color:#FFBD1B;
+    font-weight: bolder;
+}
+
+
+
+/*******************************
+HEADER 2
+********************************/
+
+.header2 {
+    display:flex;
+    flex-wrap: wrap;
+    background-image:
+    radial-gradient(
+      circle at center center,
+      #280F31 50%,
+      #4D2B59 500%
+    );
+    min-height: 100px;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav2 {
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+}
+
+.nav2 > ul{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width:60%;
+    height: 100%;
+    align-items:center;
+}
+
+.nav2 > ul > li{
+    display: inline;
+    padding:10px 15px;
+}
+
+.nav2 > ul > li > a{
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 14px;
+    color:white;
+    padding:8px 15px;
+}
+
+/*******************************
+FOOTER
+********************************/
+
+footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding:20px;
+}
+
+footer > p, a {
+    font-family: 'Roboto', sans-serif;
+    color:black;
+}
+
+footer > div > a:hover {
+    color:black;
+}
+
+footer > div > img {
+    width:50px;
+}
+
+

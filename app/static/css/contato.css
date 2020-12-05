@@ -1,0 +1,61 @@
+
+
+.contato{
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+    max-width: 800px;
+    margin: 50px auto;
+}
+
+.info_forms{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.info{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    max-width: 400px;
+}
+
+.info > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width:100%;
+    margin:10px 0;
+}
+
+.info > div > img{
+    max-width: 80px;
+    margin:10px;
+}
+
+.info > div > div > h6{
+    font-family: 'Roboto', sans-serif;
+    color:black;
+    font-size: 19px;
+}
+
+.info > div > div > p{
+    font-family: 'Roboto', sans-serif;
+    color:black;
+    font-size: 14px;
+    text-align: justify;
+}
+
+
+.forms{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    max-width: 400px;
+    padding:15px;
+}
