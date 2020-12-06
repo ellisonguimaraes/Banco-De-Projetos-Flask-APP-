@@ -16,4 +16,7 @@ class Projeto(db.Model):
     images_file = db.Column(db.Text)
 
     pessoa_projeto = db.relationship('PessoaProjeto', back_populates='projetos')
+    tag_projeto = db.relationship('TagProjeto', back_populates='projetos')
+    historicos = db.relationship('Historico', back_populates='projetos')
+    notificacoes = db.relationship('Notificacao', back_populates='projetos')
 

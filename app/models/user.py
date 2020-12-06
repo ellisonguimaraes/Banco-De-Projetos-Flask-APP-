@@ -15,6 +15,8 @@ class User(db.Model, UserMixin):
     type_user = db.Column(db.Integer, nullable=False)
 
     pessoa_projeto = db.relationship('PessoaProjeto', back_populates='users')
+    historicos = db.relationship('Historico', back_populates='users')
+    notificacoes = db.relationship('Notificacao', back_populates='users')
 
     def __init__(self, name, email, password, specialty, summary, ref, type_user):
         self.name = name

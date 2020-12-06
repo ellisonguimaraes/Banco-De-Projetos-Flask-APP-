@@ -1,0 +1,10 @@
+{% extends 'manager/base2.html' %}
+
+
+{% block content %}
+    <h2 id="title_h2">{% block title %}Gerenciamento Projetos{% endblock %}</h2>
+
+    {% for lp in list_projects %}
+        {{lp.title}}
+    {% endfor %}
+{% endblock %}

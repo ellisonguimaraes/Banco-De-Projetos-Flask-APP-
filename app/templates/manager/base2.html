@@ -2,43 +2,53 @@
 <html lang="pt-br">
 <head>
     <meta charset="utf-8"/>
-    <title>{% block title %}{% endblock %}</title>
+    <title>Gerenciamento {% block title %}{% endblock %}.</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{url_for('static', filename='dist/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
-    {% block header %}{% endblock %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/manager.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <header class="header2">
-        <nav class="nav2">
-            <h1 id="titleheader">Projetos<span>.</span></h1>
-            <ul>
-                <li><a href="index.html" alt="" >Home</a></li>
-                <li><a href="projeto.html" alt="" >Projetos</a></li>
-                <li><a href="contato.html" alt="" id="active">Contato</a></li>
-                <li>
-                    {% if current_user.is_authenticated %}
+            <nav class="nav2 nav2_edit item_nav">
+                <h1 id="titleheader">Projetos<span>.</span></h1>
+                <ul>
+                    <li><a href="index.html" alt="" id="active">Home</a></li>
+                    <li><a href="projeto.html" alt="">Projetos</a></li>
+                    <li><a href="contato.html" alt="">Contato</a></li>
+                    <li>
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ current_user.name }}
                             </button>
 
                             <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="{{url_for('manager.manager_projects')}}">Meus projetos</a>
+                                  <a class="dropdown-item" href="gerenciamento.html">Meus projetos</a>
                                   <div class="dropdown-divider"></div>
                                   <a class="dropdown-item" href="{{url_for('auth.logout')}}">Sair</a>
                             </div>
-                     </div>
-                    {% else %}
-                        <a href="{{url_for('auth.login')}}" alt="" id="button">Acessar</a>
-                    {% endif %}
-                </li>
-            </ul>
-        </nav>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="break_row"></div>
+
+            <section class="nav_gerencia item_nav">
+                <nav class="nav nav-tabs nav-fill">
+                    <a class="nav-item nav-link active" href="#">Projetos</a>
+                    <a class="nav-item nav-link" href="gerenciamento_usuario.html"alt="">Usuarios</a>
+                    <a href="gerenciamento_notif.html" class="nav-item nav-link notification_person">
+                        <span>Notificações</span>
+                        <span class="badge">3</span>
+                    </a>
+                </nav>
+            </section>
     </header>
-    
+
     {% block content %}
     {% endblock %}
 

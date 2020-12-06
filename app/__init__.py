@@ -33,6 +33,10 @@ def create_app():
     from .models.user import User
     from .models.projeto import Projeto
     from .models.pessoa_projeto import PessoaProjeto
+    from .models.tag import Tag
+    from .models.tag_projeto import TagProjeto
+    from .models.historico import Historico
+    from .models.notificacao import Notificacao
     Migrate(app, db)
 
     # Register Blueprints
