@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="utf-8"/>
-    <title>{% block title %}{% endblock %}</title>
+    <title>Project. - {% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{url_for('static', filename='dist/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
@@ -15,20 +15,23 @@
         <nav class="nav2">
             <h1 id="titleheader">Projetos<span>.</span></h1>
             <ul>
-                <li><a href="index.html" alt="" >Home</a></li>
-                <li><a href="projeto.html" alt="" >Projetos</a></li>
-                <li><a href="contato.html" alt="" id="active">Contato</a></li>
+                <li><a href="{{ url_for('main.index') }}" alt="" id="{{'active' if request.endpoint == 'main.index'}}">Home</a></li>
+                <li><a href="{{ url_for('main.projects') }}" alt="" id="{{'active' if request.endpoint == 'main.projects'}}">Projetos</a></li>
+                <li><a href="{{ url_for('main.contact') }}" alt="" id="{{'active' if request.endpoint == 'main.contact'}}">Contato</a></li>
                 <li>
                     {% if current_user.is_authenticated %}
                         <div class="dropdown">
                             <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ current_user.name }}
+                                {{ current_user.name.split(' ')[0] }}
                             </button>
 
                             <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="{{url_for('manager.manager_projects')}}">Meus projetos</a>
-                                  <div class="dropdown-divider"></div>
-                                  <a class="dropdown-item" href="{{url_for('auth.logout')}}">Sair</a>
+                                <a class="dropdown-item" href="{{url_for('main.profile', user_id=current_user.id)}}">Perfil</a>
+                                <a class="dropdown-item" href="{{url_for('manager.project_list')}}">Meus projetos</a>
+                                <a class="dropdown-item" href="{{url_for('manager.notify')}}">Notificações</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{url_for('auth.update')}}">Editar perfil</a>
+                                <a class="dropdown-item" href="{{url_for('auth.logout')}}">Sair</a>
                             </div>
                      </div>
                     {% else %}

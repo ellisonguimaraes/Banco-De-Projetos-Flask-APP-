@@ -1,0 +1,69 @@
+{% extends 'base1.html' %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/contact.css')}}">
+{% endblock%}
+
+{% block content %}
+    <section class="contato">
+        <h2 id="title_h2">{% block title %}Fale Conosco{% endblock %}</h2>
+        <hr id="line"/>
+        <section class="info_forms">
+            <section class="info">
+                <div>
+                    <img src="{{url_for('static', filename='img/local.png')}}"/>
+                    <div>
+                        <h6>Endereço</h6>
+                        <p>Pavilhão de Ciências Exatas e Tecnológicas<br/>
+                            UESC, Ilhéus-Ba</p>
+                    </div>
+                </div>
+
+                <div>
+                    <img src="{{url_for('static', filename='img/mail.png')}}"/>
+                    <div>
+                        <h6>Email</h6>
+                        <p>Pavilhão de Ciências Exatas e Tecnológicas<br/>
+                            UESC, Ilhéus-Ba</p>
+                    </div>
+                </div>
+
+                <div>
+                    <img src="{{url_for('static', filename='img/tel.png')}}"/>
+                    <div>
+                        <h6>Telefone</h6>
+                        <p>Pavilhão de Ciências Exatas e Tecnológicas<br/>
+                            UESC, Ilhéus-Ba</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="forms">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="alert alert-success">
+                            {{ messages[0] }}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+                <form method="post" action="{{url_for('main.contact')}}">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea class="form-control" id="message" rows="3" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                  </form>
+            </section>
+        </section>
+    </section>
+{% endblock %}

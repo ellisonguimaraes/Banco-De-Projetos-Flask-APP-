@@ -1,0 +1,59 @@
+{% extends 'base1.html' %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/profile.css')}}">
+{% endblock%}
+
+{% block content %}
+    <section class="perfil">
+        <section class="dados">
+            {% if user.id|file_exists_profile %}
+                <img class="rounded-circle img-thumbnail" src="{{url_for('static', filename='upload/profile/'+user.id|string)}}"/>
+            {% else %}
+                <img class="rounded-circle img-thumbnail" src="{{url_for('static', filename='img/perfil_photo.png')}}"/>
+            {% endif %}
+
+            <h2>{{user.name}}</h2>
+            <p style="text-align:center"><b>{{user.specialty}}</b></p>
+            <p style="text-align:center"><a href="{{user.ref}}" title="Mais Informações">{{user.ref}}</a></p>
+            {% if user.summary %}
+                <h4>Descrição</h4>
+                <p>{{user.summary}}</p>
+            {% endif %}
+            <h4>Contato</h4>
+            <p>{{user.email}}</p>
+        </section>
+
+        <section class="projetos">
+
+            <h2 id="title_h2">Projetos</h2>
+            <hr id="line"/>
+
+
+            <section class="icards">
+                {% if user.pessoa_projeto|length %}
+                    {% for pp in user.pessoa_projeto %}
+                        <section class="icard">
+                            <section class="tags">
+                                {% for tp in pp.projetos.tag_projeto[0:3] %}
+                                    <a href="{{ url_for('main.projects', tag_id=tp.tag_id) }}">{{tp.tags.category}}</a>
+                                {% endfor %}
+                            </section>
+                            <section class="image_title">
+                                <img src="{{url_for('static', filename='img/torre.jpg')}}" alt=""/>
+                                <div class="shadow"></div>
+                                <h4>{{pp.projetos.title}}</h4>
+                            </section>
+                            <p>{{pp.projetos.summary[0:100]}} {% if pp.projetos.summary|length  > 100 %} ... {% endif %}</p>
+                            <a id="button" href="{{url_for('main.project_page', project_id=pp.projetos.id)}}" title="">Acesse este projeto</a>
+                        </section>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center m-5">{{user.name}} não possui projetos.</p>
+                {% endif %}
+            </section>
+
+
+        </section>
+    </section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'manager/base2.html' %}
+
+
+{% block content %}
+    <section class="gerenciamento">
+        <h2 id="title_h2">{% block title %}Excluindo Projeto{% endblock %}</h2>
+        <hr id="line"/>
+        <h2 id="title_h2" class="text-center m-5">Você realmente deseja excluir o projeto "{{project.title}}"?</h2>
+
+        <form method="post" action="{{ url_for('manager.project_delete', project_id=project.id) }}" class="text-center">
+            <button type="submit" class="btn btn-danger btn-lg m-3">Excluir</button>
+            <a href="{{ url_for('manager.project_list') }}" class="btn btn-outline-primary btn-lg m-3">Voltar</a>
+        </form>
+    </section>
+{% endblock %}

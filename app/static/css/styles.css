@@ -149,6 +149,7 @@ HEADER 2
 .header2 {
     display:flex;
     flex-wrap: wrap;
+    flex-direction:column;
     background-image:
     radial-gradient(
       circle at center center,

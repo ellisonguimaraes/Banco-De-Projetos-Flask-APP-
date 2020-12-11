@@ -1,0 +1,93 @@
+{% extends 'manager/base2.html' %}
+
+
+{% block content %}
+    <section class="gerenciamento">
+        <h2 id="title_h2">{% block title %}Notificações{% endblock %}</h2>
+        <hr id="line"/>
+
+        <h3>Recebidas</h3>
+        {% if project_notifications|length %}
+            <div class="table-responsive">
+                <table class="table table-hover" id="paginatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Solicitação</th>
+                            <th scope="col">De</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pn in project_notifications %}
+                            <tr>
+                                <td>
+                                    Solicitação para entrar no projeto: <b>{{pn.projetos.title}}</b>.
+                                    {% if pn.was_accepted == 1 %}
+                                        <span id="concluido">Aceito</span>
+                                    {% elif pn.was_accepted == -1 %}
+                                        <span id="rejeitado">Rejeitado</span>
+                                    {% else %}
+                                        <span id="em_andamento">Pendente</span>
+                                    {% endif %}
+                                </td>
+                                <td><a href="{{ url_for('main.profile', user_id=pn.users.id) }}">{{pn.users.name}}</a></td>
+                                <td>{{pn.date}}</td>
+                                <td>
+                                    {% if pn.was_accepted == 0 %}
+                                        <a class="btn btn-success m-1" href="{{ url_for('manager.notify_accept', notify_id=pn.id) }}">Permitir</a>
+                                        <a class="btn btn-danger m-1" href="{{ url_for('manager.notify_reject', notify_id=pn.id) }}">Rejeitar</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p style="text-align:center;width:100%;">Não há notificações nesta sessão.</p>
+        {% endif %}
+
+
+        <h3>Enviadas</h3>
+        {% if my_notifications|length %}
+            <div class="table-responsive">
+                <table class="table table-hover" id="paginatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Solicitação</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for mn in my_notifications %}
+                            <tr>
+                                <td>
+                                    Solicitação para entrar no projeto: <b>{{mn.projetos.title}}</b>.
+                                    {% if mn.was_accepted == 1 %}
+                                        <span id="concluido">Aceito</span>
+                                    {% elif mn.was_accepted == -1 %}
+                                        <span id="rejeitado">Rejeitado</span>
+                                    {% else %}
+                                        <span id="em_andamento">Pendente</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{mn.date}}</td>
+                                <td>
+                                    {% if mn.was_accepted == 0 %}
+                                        <a class="btn btn-danger m-1" href="{{ url_for('manager.notify_cancel', notify_id=mn.id) }}">Cancelar</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p style="text-align:center;width:100%;">Não há notificações nesta sessão.</p>
+        {% endif %}
+
+    </section>
+
+{% endblock %}

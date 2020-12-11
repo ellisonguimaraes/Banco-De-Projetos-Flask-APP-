@@ -1,3 +1,37 @@
+#em_andamento {
+    border:1px solid #FFBD1B;
+    padding:2px 5px;
+    color:#FFBD1B;
+    margin:0 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+#concluido {
+    border:1px solid green;
+    padding:2px 5px;
+    color:green;
+    margin:0 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+#rejeitado {
+    border:1px solid red;
+    padding:2px 5px;
+    color:red;
+    margin:0 10px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+
 
 .nav2_edit{
     padding:30px 0;
@@ -31,6 +65,15 @@
     padding:50px 10px;
   }
 
+.gerenciamento > h3 {
+    color:black;
+    margin:30px 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    width:100%;
+    text-align:left;
+}
 
 #title_h2 {
     justify-content: start;

@@ -1,0 +1,145 @@
+
+
+
+.perfil{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width:100%;
+    max-width: 900px;
+    margin:50px auto;
+}
+
+.dados{
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.dados > h2{
+  padding:15px 15px 0px;
+  font-family: 'Roboto', sans-serif;
+  color:black;
+  font-size: 22px;
+}
+
+.dados > a{
+  font-family: 'Roboto', sans-serif;
+  color:rgb(83, 4, 70);
+  font-size: 12px;
+}
+
+.dados > h4{
+  background:#ccc;
+  padding:15px;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  color:black;
+  font-size: 18px;
+}
+
+.dados > p{
+  color: #9F9EAC;
+  padding:5px 15px 20px;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+}
+
+
+.dados > img {
+
+  width: 50%;
+}
+
+
+.projetos > nav {
+  display: flex;
+  justify-content: center;
+  width:100%;
+  padding:25px 0 0;
+}
+
+
+.projetos{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width:100%;
+    max-width: 600px;
+    padding:20px;
+}
+
+.icards{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width:100%;
+  }
+  
+  .icard{
+    display: flex;
+    flex-direction: column;
+    width:30%;
+    min-width: 200px;
+    margin:15px 10px;
+  }
+  
+  .icard > * {
+    margin:0 0 15px;
+  }
+  
+  .tags > a{
+    padding:2px 5px;
+    border:2px solid #FFBD1B;
+    border-radius:5px;
+    color: #FFBD1B;
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+  } 
+  
+  .image_title{
+    position: relative;
+    height: 127px;
+  }
+  
+  .image_title > img{
+    position: absolute;
+    width:100%;
+    height: 127px;
+    border-radius: 10px;
+  }
+  
+  .shadow{
+    position: absolute;
+    width:100%;
+    height: 127px;
+    border-radius: 10px;
+    background:linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,1) 100%);
+  }
+  
+  .image_title > h4 {
+    padding:10px;
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+  }
+  
+  .icard > p {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-align: justify;
+    padding:0 10px;
+  }
+  
+  .icard > .b_card {
+    color: black;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+  }
+  

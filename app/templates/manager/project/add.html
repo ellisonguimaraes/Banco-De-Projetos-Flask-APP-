@@ -1,0 +1,71 @@
+{% extends 'manager/base2.html' %}
+
+
+{% block content %}
+    <section class="gerenciamento">
+        <h2 id="title_h2">{% block title %}Novo Projeto{% endblock %}</h2>
+        <hr id="line"/>
+
+        <form method="post" action="{{ url_for('manager.project_add') }}" class="form-group" enctype="multipart/form-data" style="width:100%">
+            <div class="form-group">
+                <label for="title">Título do Projeto (*)</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Título" required>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status (*)</label>
+                <select class="form-control" id="status" name="status">
+                    <option value="0">Em andamento</option>
+                    <option value="1">Concluído</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="summary">Resumo (*)</label>
+                <textarea class="form-control" id="summary" name="summary" rows="3" placeholder="Descrição do Projeto" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="area">Área de Conhecimento (*)</label>
+                <input type="text" class="form-control" id="area" name="area" placeholder="" required>
+            </div>
+
+            <div class="form-group">
+                <label for="date">Data de Ínicio (*)</label>
+                <input class="form-control" type="datetime-local" id="date" name="date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="contact_email">Email (*)</label>
+                <input type="email" class="form-control" id="contact_email" name="contact_email" placeholder="email@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="url">Url de Referência</label>
+                <input type="text" class="form-control" id="url" name="url" placeholder="Github, site, etc.">
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Palavras Chaves</label>
+                <input type="text" class="form-control" id="tags" name="tags" placeholder="IOT, Database, BI">
+                <small id="emailHelp" class="form-text text-muted">Colocar as palavras chaves divididas por vírgulas.</small>
+            </div>
+
+            <div class="form-group">
+                <label for="images">Nova foto de Perfil</label>
+                <input type="file" multiple="true" class="form-control-file" id="images" autocomplete="off" name="images" accept="image/jpeg, image/png">
+            </div>
+
+            <div class="form-group">
+                <label for="pdf">PDF</label>
+                <input type="file" class="form-control-file" id="pdf" name="pdf" accept="application/pdf">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-outline-success btn-lg m-3">Adicionar</button>
+                <a href="{{ url_for('manager.project_list') }}" class="btn btn-outline-primary btn-lg m-3">Voltar</a>
+            </div>
+
+        </form>
+    </section>
+{% endblock %}

@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -15,6 +16,7 @@ def create_app():
     app.config['SECRET_KEY'] = 'secret'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['UPLOAD_FOLDER'] = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static', 'upload')
 
     # Configure route login
     login_manager.login_view = 'auth.login'
@@ -37,6 +39,7 @@ def create_app():
     from .models.tag_projeto import TagProjeto
     from .models.historico import Historico
     from .models.notificacao import Notificacao
+    from .models.form_contact import FormContact
     Migrate(app, db)
 
     # Register Blueprints

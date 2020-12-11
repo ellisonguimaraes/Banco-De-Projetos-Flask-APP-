@@ -13,3 +13,8 @@ class PessoaProjeto(db.Model):
 
     type = db.Column(db.Integer, nullable=False)
 
+    def __init__(self, user_id, project_id, type):
+        self.user_id = user_id
+        self.project_id = project_id
+        self.type = type
+

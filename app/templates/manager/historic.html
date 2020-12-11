@@ -1,0 +1,80 @@
+{% extends 'manager/base2.html' %}
+
+
+{% block content %}
+    <section class="gerenciamento">
+        <h2 id="title_h2">{% block title %}Histórico - {{project.title}}{% endblock %}</h2>
+        <hr id="line"/>
+
+        <p>
+            <a class="btn btn-primary btn-lg mb-4" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Nova Atualização
+            </a>
+        </p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages[0] == 'DeletedHistoric' %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <p>Deletado com sucesso.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif messages[0] == 'AddedHistoric' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p>Adicionado com sucesso.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="collapse w-75" id="collapseExample">
+            <form method="post" action="{{ url_for('manager.project_historic', project_id=project.id) }}" class="my-2 py-3 w-100" style="width:100%">
+                <div class="form-group">
+                    <label for="description">Digite a atualização</label>
+                    <textarea name="description" id="description" class="form-control form-control-ld m-2" rows="3" placeholder="Relatar atualização" required></textarea>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-primary text-center btn-ld m-2">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        {% if project_historic_list|length %}
+            <div class="table-responsive">
+                <table class="table table-hover" id="paginatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Data</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Atividade</th>
+                            {% if project.id|is_leader %}
+                                <th scope="col">Ações</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for h in project_historic_list %}
+                            <tr>
+                                <td>{{h.date.strftime('%d/%m/%Y %H:%M')}}</td>
+                                <td><a href="{{ url_for('main.profile', user_id=h.users.id) }}">{{h.users.name}}</a></td>
+                                <td>{{h.description}}</td>
+                                <td>
+                                    {% if project.id|is_leader %}
+                                        <a href="{{ url_for('manager.project_historic_delete', project_id=project.id, historic_id=h.id) }}" class="btn btn-danger btn-ld">Excluir</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-center m-5">Não há histórico adicionado a este projeto.</p>
+        {% endif %}
+
+    </section>
+
+{% endblock %}

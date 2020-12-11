@@ -11,6 +11,17 @@
     font-weight: bold;
 }
 
+#concluido {
+    border:1px solid green;
+    padding:2px 5px;
+    color:green;
+    margin:0 0 15px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 11px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
 .proj_page{
     display:flex;
     flex-wrap: wrap;

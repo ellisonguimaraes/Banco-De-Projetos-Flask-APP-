@@ -1,9 +1,122 @@
-{% extends 'base1.html' %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8"/>
+    <title>Project. - Página Inicial</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{url_for('static', filename='dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/index.css')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <section>
+            <nav class="nav">
+                <h1 id="titleheader">Projetos<span>.</span></h1>
+                <ul>
+                    <li><a href="{{ url_for('main.index') }}" alt="" id="active">Home</a></li>
+                    <li><a href="{{ url_for('main.projects') }}" alt="">Projetos</a></li>
+                    <li><a href="{{ url_for('main.contact') }}" alt="">Contato</a></li>
+                    <li>
+                        {% if current_user.is_authenticated %}
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ current_user.name.split(' ')[0] }}
+                                </button>
 
-{% block header %}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/login_register.css')}}">
-{% endblock%}
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{url_for('main.profile', user_id=current_user.id)}}">Perfil</a>
+                                    <a class="dropdown-item" href="{{url_for('manager.project_list')}}">Meus projetos</a>
+                                    <a class="dropdown-item" href="{{url_for('manager.notify')}}">Notificações</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{url_for('auth.update')}}">Editar perfil</a>
+                                    <a class="dropdown-item" href="{{url_for('auth.logout')}}">Sair</a>
+                                </div>
+                         </div>
+                        {% else %}
+                            <a href="{{url_for('auth.login')}}" alt="" id="button">Acessar</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+            <section>
+                <h3>Uma plataforma de <span>banco de projetos</span>. </h3>
+                <p>Aqui você poderá encontrar projetos interdisciplinares do curso de Ciência da Computação na Uesc.</p>
+                <a href="{{ url_for('main.projects') }}" title="" id="button">Acesse nossos projetos</a>
+            </section>
+        </section>
+    </header>
 
-{% block content %}
-    <h2 id="title_h2">{% block title %}Página Inicial{% endblock %}</h2>
-{% endblock %}
+
+    <section class="projects_featured">
+        <h2 id="title_h2">Projetos Recentes</h2>
+        <hr id="line"/>
+        <section class="icards">
+            {% for rp in recent_projects %}
+                <section class="icard">
+                    <section class="tags">
+                        {% for tp in rp.tag_projeto[0:3] %}
+                            <a href="{{ url_for('main.projects', tag_id=tp.tag_id) }}" alt="">{{tp.tags.category}}</a>
+                        {% endfor %}
+                    </section>
+                    <section class="image_title">
+                        <img src="{{url_for('static', filename='img/torre.jpg')}}" alt=""/>
+                        <div class="shadow"></div>
+                        <h4>{{rp.title}}</h4>
+                    </section>
+                    <p>{{rp.summary[0:60]}}...</p>
+                    <a id="button" href="{{url_for('main.project_page', project_id=rp.id)}}" title="">Acesse este projeto</a>
+                </section>
+            {% endfor %}
+        </section>
+    </section>
+
+
+
+    <section class="n_platform">
+        <section class="n_platform_center">
+            <section>
+                <section>
+                    <h6>{{len_projects_incompleted}}</h6>
+                    <p>Projetos em Aberto</p>
+                </section>
+
+                <section>
+                    <h6>{{len_projects_completed}}</h6>
+                    <p>Projetos Concluídos</p>
+                </section>
+
+                <section>
+                    <h6>{{len_projects}}</h6>
+                    <p>Total de Projetos</p>
+                </section>
+            </section>
+
+            <p>Venha publicar o seu projeto!</p>
+            <a id="button" href="{{ url_for('auth.register') }}" title="">Realize seu Cadastro</a>
+        </section>
+    </section>
+
+
+
+    <footer>
+        <p>© Copyright 2020 - 2021 - All Rights Reserved</p>
+        <div>
+            <a href="http://www.uesc.br/" title="Acesse o site da Uesc" >UESC</a>
+            <img src="{{url_for('static', filename='img/logo.png')}}" />
+        </div>
+    </footer>
+
+    <script>
+        function onSubmit(token) {
+          document.getElementById("demo-form").submit();
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

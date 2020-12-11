@@ -1,0 +1,48 @@
+{% extends 'base1.html' %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/historic.css')}}">
+{% endblock%}
+
+{% block content %}
+
+    <section class="proj_page">
+        {% if project.status == 0 %}
+            <p id="em_andamento">Em Andamento</p>
+        {% else %}
+            <p id="concluido">Concluído</p>
+        {% endif %}
+
+        <h2 id="title_h2">{% block title %}Histórico - {{ project.title }}{% endblock %}</h2>
+        <hr id="line"/>
+
+        <section class="itens">
+            <a href="{{ url_for('main.project_page', project_id=project.id) }}" type="button" class="btn btn-outline-primary">Voltar a página</a>
+        </section>
+
+        {% if project.historicos|length %}
+            <section class="historico">
+                <table class="table table-borderless table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Data</th>
+                            <th scope="col">Autor</th>
+                            <th scope="col">Atividade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for h in project.historicos %}
+                        <tr>
+                            <td>{{h.date.strftime('%d/%m/%Y às %H:%M')}}</td>
+                            <td><a href="{{ url_for('main.profile', user_id=h.users.id) }}" class="link_author">{{h.users.name}}</a></td>
+                            <td>{{h.description}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        {% else %}
+            <p class="text-center m-5">Não há histórico adicionado a este projeto.</p>
+        {% endif %}
+    </section>
+{% endblock %}

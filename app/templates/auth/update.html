@@ -1,0 +1,65 @@
+{% extends 'base1.html' %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login_register.css')}}">
+{% endblock %}
+
+{% block content %}
+<section class="content">
+    <h2 id="title_h2">{% block title %}Atualizar Dados{% endblock %}</h2>
+    <hr id="line"/>
+
+    <section class="form">
+        {% with messages = get_flashed_messages() %}
+            {% if messages[0] == 'EmailHasExists' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p>Email já existente!</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif messages[0] == 'SuccessEdit'%}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p>Atualizado com sucesso.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+
+        <form method="post" action="{{url_for('auth.update')}}" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Nome*</label>
+                <input type="text" value="{{user.name}}" name="name" id="name" class="form-control" placeholder="Nome" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email*</label>
+                <input type="email" value="{{user.email}}" name="email" id="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <label for="specialty">Especialidade*</label>
+                <input type="text" value="{{user.specialty}}" name="specialty" id="specialty" class="form-control" placeholder="Especialidade" required>
+            </div>
+            <div class="form-group">
+                <label for="summary">Resumo</label>
+                <textarea class="form-control" name="summary" id="summary" rows="3">{{user.summary }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="ref">Link de referência</label>
+                <input type="text" value="{{user.ref}}" name="ref" id="ref" class="form-control" placeholder="(lattes, redes sociais, etc)">
+            </div>
+
+            <div class="form-group">
+                <label for="perfil_image">Nova foto de Perfil</label>
+                <input type="file" class="form-control-file" id="perfil_image" name="perfil_image" accept="image/jpeg, image/png">
+            </div>
+
+            <div class="button">
+                <button type="submit" class="btn btn-outline-primary btn-lg">Editar</button>
+            </div>
+        </form>
+    </section>
+</section>
+{% endblock %}

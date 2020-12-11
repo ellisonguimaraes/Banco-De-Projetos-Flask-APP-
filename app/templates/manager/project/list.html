@@ -1,0 +1,114 @@
+{% extends 'manager/base2.html' %}
+
+
+{% block content %}
+    <section class="gerenciamento">
+        {% with messages = get_flashed_messages() %}
+            {% if messages[0] == 'AddedProject' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p>Projeto adicionado com sucesso.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif messages[0] == 'DeletedProject' %}
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <p>Projeto deletado com sucesso.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif messages[0] == 'UpdatedProject' %}
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <p>Projeto atualizado com sucesso.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <h2 id="title_h2">{% block title %}Gerenciamento de Projetos{% endblock %}</h2>
+        <hr id="line"/>
+        <a href="{{ url_for('manager.project_add') }}"><button type="button" class="btn btn-primary btn-lg add_button">Novo Projeto</button></a>
+
+        <h3>Como Orientador</h3>
+        {% if list_leader|length %}
+            <div class="table-responsive">
+                <table class="table table-hover" id="paginatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Projeto</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ll in list_leader %}
+                            <tr>
+                                <td>
+                                    <a href="{{url_for('main.project_page', project_id=ll.id)}}">{{ll.title}}</a>
+
+                                    {% if ll.status == 0 %}
+                                        <span id="em_andamento">Em Andamento</span>
+                                    {% else %}
+                                        <span id="concluido">Concluído</span>
+                                    {% endif %}
+
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-primary m-1" href="{{url_for('manager.project_historic', project_id=ll.id)}}">Histórico</a>
+                                    <a class="btn btn-outline-success m-1" href="{{url_for('manager.project_members', project_id=ll.id)}}">Membros</a>
+                                    <a class="btn btn-outline-warning m-1" href="{{url_for('manager.project_update', project_id=ll.id)}}">Editar</a>
+                                    <a class="btn btn-danger m-1" href="{{ url_for('manager.project_delete', project_id=ll.id) }}">Excluir</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p style="text-align:center;width:100%;">Não há projetos nesta sessão.</p>
+        {% endif %}
+
+
+
+        <h3>Como Participante</h3>
+        {% if list_participant|length %}
+            <div class="table-responsive">
+                <table class="table table-hover" id="paginatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Projeto</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for lp in list_participant %}
+                            <tr>
+                                <td>
+                                    <a href="{{url_for('main.project_page', project_id=lp.id)}}">{{lp.title}}</a>
+
+                                    {% if lp.status == 0 %}
+                                        <span id="em_andamento">Em Andamento</span>
+                                    {% else %}
+                                        <span id="concluido">Concluído</span>
+                                    {% endif %}
+
+                                </td>
+                                <td>
+                                    <a class="btn btn-outline-primary m-1" href="{{url_for('manager.project_historic', project_id=lp.id)}}">Histórico</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p style="text-align:center;width:100%;">Não há projetos nesta sessão.</p>
+        {% endif %}
+    </section>
+
+
+
+
+{% endblock %}

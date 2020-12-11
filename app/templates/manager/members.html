@@ -1,0 +1,89 @@
+{% extends 'manager/base2.html' %}
+
+
+{% block content %}
+    <section class="gerenciamento">
+        <h2 id="title_h2">{% block title %}Membros do Projeto - {{project.title}}{% endblock %}</h2>
+        <hr id="line"/>
+
+        <p>
+            <a class="btn btn-primary btn-lg mb-4" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Adicionar Membro
+            </a>
+        </p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages[0] == 'UserNotExists' %}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <p>Usuário não existe.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% elif messages[0] == 'AddedMember'%}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <p>Adicionado com sucesso.</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="collapse w-50" id="collapseExample">
+            <form method="post" action="{{ url_for('manager.project_members', project_id=project.id) }}" class="my-2 py-3 w-100" style="width:100%">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" class="form-control form-control-ld" required/>
+                </div>
+                <div class="form-group">
+                    <label for="role">Cargo</label>
+                    <select class="form-control" name="role" id="role">
+                        <option value="1">Participante</option>
+                        <option value="0">Orientador</option>
+                    </select>
+                </div>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-outline-primary btn-ld col-sm-2">Salvar</button>
+                </div>
+            </form>
+        </div>
+
+        {% if list_pessoa_projeto|length %}
+            <div class="table-responsive">
+                <table class="table table-hover" id="paginatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Especialidade</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for pp in list_pessoa_projeto %}
+                            <tr>
+                                <td><a href="{{ url_for('main.profile', user_id=pp.users.id) }}">{{pp.users.name}}</a></td>
+                                <td>{{pp.users.specialty}}</td>
+                                <td>
+                                    {% if pp.type == 0 %}
+                                        Orientador
+                                    {% else %}
+                                        Participante
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a class="btn btn-danger" href="{{ url_for('manager.project_members_delete', project_id=pp.project_id, user_id=pp.user_id) }}">Excluir</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                      </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="text-center m-5">Não há nenhum participante.</p>
+        {% endif %}
+
+    </section>
+
+{% endblock %}

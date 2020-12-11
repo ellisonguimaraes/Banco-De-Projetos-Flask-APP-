@@ -1,0 +1,115 @@
+{% extends 'base1.html' %}
+
+{% block header %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/projects.css')}}">
+{% endblock%}
+
+{% block content %}
+
+<section class="project">
+    <h2 id="title_h2">{% block title %}Projetos{% endblock %}</h2>
+    <hr id="line"/>
+
+    <form action="{{url_for('main.projects')}}" method="post" class="search" id="filter_form" name="filter_form">
+        <input class="form-control form-control-lg" type="text" name="search" value="{{search if search }}" placeholder="Pesquise pelo projeto" required>
+        <button type="submit" class="btn btn-outline-primary btn-lg">Buscar</button>
+    </form>
+
+    <section class="navigation">
+        <section class="menu">
+            <h4>Filtros</h4>
+            <div>
+                <p>Status</p>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="todos" value="None" form="filter_form" onchange="filter_form.submit()" {{'checked' if status=='None' or status==None }}>
+                    <label class="form-check-label" for="todos">
+                        Todos
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="em_andamento" form="filter_form" onchange="filter_form.submit()" value="0" {{'checked' if status=='0' }}>
+                    <label class="form-check-label" for="em_andamento">
+                        Em andamento
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="status" id="concluido" form="filter_form" onchange="filter_form.submit()" value="1" {{"checked" if status=='1' }}>
+                    <label class="form-check-label" for="concluido">
+                        Concluído
+                    </label>
+                </div>
+
+            </div>
+            <div>
+                <p>Tags</p>
+
+                {% for tag in tags %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{tag.id}}" name="tags" id="{{tag.id}}" form="filter_form" onchange="filter_form.submit()"
+                               {{'checked' if tag.id|string in select_tags}}>
+                        <label class="form-check-label" for="{{tag.id}}">
+                            {{tag.category}}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+
+        <section class="explore">
+            <section class="order">
+                <select form="filter_form" onchange="filter_form.submit()" name="order" class="custom-select mr-sm-2">
+                    <option value="None" {{'selected' if order==None }}>Ordem</option>
+                    <option value="1" {{'selected' if order==1 }}>Mais novos</option>
+                    <option value="2" {{'selected' if order==2 }}>Mais antigos</option>
+                    <option value="3" {{'selected' if order==3 }}>A-Z</option>
+                    <option value="4" {{'selected' if order==4 }}>Z-A</option>
+                </select>
+            </section>
+
+            <section class="icards">
+                {% if projects|length %}
+                    {% for p in projects %}
+                        <section class="icard">
+                            <section class="tags">
+                                {% for tp in p.tag_projeto[0:3] %}
+                                    <a href="{{ url_for('main.projects', tag_id=tp.tag_id) }}">{{tp.tags.category}}</a>
+                                {% endfor %}
+                            </section>
+                            <section class="image_title">
+                                <img src="{{url_for('static', filename='img/torre.jpg')}}" alt=""/>
+                                <div class="shadow"></div>
+                                <h4>{{p.title}}</h4>
+                            </section>
+                            <p>{{p.summary[0:100]}} {% if p.summary|length  > 100 %} ... {% endif %}</p>
+                            <a id="button" href="{{url_for('main.project_page', project_id=p.id)}}" title="">Acesse este projeto</a>
+                        </section>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center m-5">Não possui projetos.</p>
+                {% endif %}
+            </section>
+
+            <nav>
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+        </section>
+
+    </section>
+</section>
+{% endblock %}

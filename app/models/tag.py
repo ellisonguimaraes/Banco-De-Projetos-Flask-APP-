@@ -7,3 +7,7 @@ class Tag(db.Model):
     category = db.Column(db.String(100), nullable=False)
 
     tag_projeto = db.relationship('TagProjeto', back_populates='tags')
+
+    def __init__(self, category):
+        self.category = category
+
