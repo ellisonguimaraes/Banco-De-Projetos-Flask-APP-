@@ -15,6 +15,11 @@ def file_exists_profile(user_id):
 
 @auth.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+
+    print(current_user.is_authenticated)
+
     if request.method == 'GET':
         return render_template('auth/register.html')
 
@@ -51,6 +56,9 @@ def register():
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.index'))
+
     if request.method == 'GET':
         return render_template('auth/login.html')
 
