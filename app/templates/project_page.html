@@ -104,7 +104,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><b id="title">Autor(es):</b></td>
+                    <td><b id="title">Participantes:</b></td>
                     <td>
                         {% for pp in project.pessoa_projeto if pp.type == 1 %}
                             <p><a href="{{ url_for('main.profile', user_id=pp.users.id) }}">{{pp.users.name}}</a></p>

@@ -62,7 +62,11 @@
                         {% endfor %}
                     </section>
                     <section class="image_title">
-                        <img src="{{url_for('static', filename='img/torre.jpg')}}" alt=""/>
+                        {% if (rp.id|string+'_0')|file_exists %}
+                            <img src="{{url_for('static', filename='upload/project/'+rp.id|string+'_0')}}" alt=""/>
+                        {% else %}
+                            <img src="{{url_for('static', filename='img/torre.jpg')}}" alt=""/>
+                        {% endif %}
                         <div class="shadow"></div>
                         <h4>{{rp.title}}</h4>
                     </section>

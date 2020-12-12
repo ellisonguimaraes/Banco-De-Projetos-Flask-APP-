@@ -22,7 +22,7 @@
                         {% for pn in project_notifications %}
                             <tr>
                                 <td>
-                                    Solicitação para entrar no projeto: <b>{{pn.projetos.title}}</b>.
+                                    Solicitação para entrar no projeto: <b><a href="{{ url_for('main.project_page', project_id=pn.projetos.id) }}">{{pn.projetos.title}}</a></b>.
                                     {% if pn.was_accepted == 1 %}
                                         <span id="concluido">Aceito</span>
                                     {% elif pn.was_accepted == -1 %}
@@ -64,7 +64,7 @@
                         {% for mn in my_notifications %}
                             <tr>
                                 <td>
-                                    Solicitação para entrar no projeto: <b>{{mn.projetos.title}}</b>.
+                                    Solicitação para entrar no projeto: <b><a href="{{ url_for('main.project_page', project_id=mn.projetos.id) }}">{{mn.projetos.title}}</a></b>.
                                     {% if mn.was_accepted == 1 %}
                                         <span id="concluido">Aceito</span>
                                     {% elif mn.was_accepted == -1 %}
